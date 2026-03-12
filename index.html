@@ -1,0 +1,747 @@
+
+
+
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pembelajaran Lingkaran STEM</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap');
+        
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8f0f8 100%);
+        }
+        
+        .app-wrapper {
+            width: 100%;
+            height: 100%;
+            overflow-auto;
+        }
+        
+        .nav-active {
+            border-bottom: 3px solid #0066ff;
+            color: #0066ff;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 102, 255, 0.15);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #0066ff 0%, #0052cc 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(0, 102, 255, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #00d084 0%, #00a366 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(0, 208, 132, 0.3);
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.6s ease-out forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        
+        .diagram-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 3px solid #0066ff;
+            position: relative;
+            margin: auto;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div class="app-wrapper bg-white"><!-- Navigation -->
+   <nav class="bg-gradient-to-r from-blue-600 to-blue-800 text-white sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+     <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+       <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center"><span class="text-blue-600 font-bold text-lg">⭕</span>
+       </div>
+       <h1 id="nav-title" class="text-2xl font-bold">Lingkaran STEM</h1>
+      </div>
+      <div class="flex gap-6 text-sm md:text-base overflow-x-auto"><button onclick="switchSection('beranda')" class="nav-btn pb-2 whitespace-nowrap hover:text-blue-200 transition">Beranda</button> <button onclick="switchSection('materi')" class="nav-btn pb-2 whitespace-nowrap hover:text-blue-200 transition">Materi</button> <button onclick="switchSection('aplikasi')" class="nav-btn pb-2 whitespace-nowrap hover:text-blue-200 transition">Aplikasi STEM</button> <button onclick="switchSection('video')" class="nav-btn pb-2 whitespace-nowrap hover:text-blue-200 transition">Video</button> <button onclick="switchSection('soal')" class="nav-btn pb-2 whitespace-nowrap hover:text-blue-200 transition">Latihan</button> <button onclick="switchSection('presensi')" class="nav-btn pb-2 whitespace-nowrap hover:text-blue-200 transition">Presensi</button>
+      </div>
+     </div>
+    </div>
+   </nav><!-- Section: Beranda -->
+   <section id="beranda" class="section-content min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 py-16">
+     <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="slide-in">
+       <h1 id="judul-utama" class="text-5xl font-bold text-blue-900 mb-6">Pembelajaran Lingkaran Berbasis STEM</h1>
+       <p id="deskripsi-beranda" class="text-lg text-gray-700 mb-8 leading-relaxed">Jelajahi konsep lingkaran melalui pendekatan STEM yang mengubah pembelajaran matematika menjadi petualangan penyelidikan. Temukan bagaimana lingkaran bekerja di balik teknologi dan mesin yang kita gunakan setiap hari.</p>
+       <div class="bg-gradient-to-r from-blue-100 to-green-100 p-6 rounded-lg mb-8 border-l-4 border-blue-600">
+        <p class="text-blue-900 font-semibold">🎯 Tujuan Pembelajaran:</p>
+        <ul class="mt-3 text-gray-800 space-y-2">
+         <li>✓ Memahami konsep lingkaran dan sifat-sifatnya</li>
+         <li>✓ Menganalisis hubungan sudut pusat dan sudut keliling</li>
+         <li>✓ Menerapkan konsep lingkaran dalam teknologi modern</li>
+         <li>✓ Mengembangkan kemampuan berpikir kritis berbasis STEM</li>
+        </ul>
+       </div><button onclick="switchSection('materi')" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">Mulai Belajar →</button>
+      </div>
+      <div class="slide-in delay-1 flex justify-center">
+       <svg width="300" height="300" viewbox="0 0 300 300" class="drop-shadow-lg"><!-- Lingkaran besar --> <circle cx="150" cy="150" r="120" fill="none" stroke="#0066ff" stroke-width="3" /> <!-- Sudut pusat --> <line x1="150" y1="150" x2="150" y2="40" stroke="#ff6b35" stroke-width="2" /> <line x1="150" y1="150" x2="240" y2="150" stroke="#ff6b35" stroke-width="2" /> <path d="M 160 150 A 10 10 0 0 0 160 140" fill="none" stroke="#ff6b35" stroke-width="2" /> <!-- Sudut keliling --> <line x1="50" y1="150" x2="150" y2="40" stroke="#00d084" stroke-width="2" /> <line x1="50" y1="150" x2="240" y2="150" stroke="#00d084" stroke-width="2" /> <!-- Garis singgung --> <line x1="30" y1="150" x2="270" y2="150" stroke="#9d4edd" stroke-width="2" stroke-dasharray="5,5" /> <!-- Pusat --> <circle cx="150" cy="150" r="4" fill="#0066ff" /> <text x="160" y="155" font-size="12" fill="#0066ff" font-weight="bold">
+         O
+        </text>
+       </svg>
+      </div>
+     </div>
+    </div>
+   </section><!-- Section: Materi -->
+   <section id="materi" class="section-content min-h-screen hidden bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 py-16">
+     <h2 class="text-4xl font-bold text-blue-900 mb-12 text-center">📚 Materi Pembelajaran</h2>
+     <div class="grid md:grid-cols-2 gap-8 mb-8"><!-- Sudut Pusat -->
+      <div class="card-hover bg-white p-8 rounded-xl shadow-md border-t-4 border-blue-600">
+       <h3 class="text-2xl font-bold text-blue-900 mb-4">1. Sudut Pusat</h3>
+       <div class="mb-6 flex justify-center">
+        <svg width="180" height="180" viewbox="0 0 180 180"><circle cx="90" cy="90" r="70" fill="none" stroke="#0066ff" stroke-width="2" /> <line x1="90" y1="90" x2="90" y2="25" stroke="#ff6b35" stroke-width="2" /> <line x1="90" y1="90" x2="155" y2="90" stroke="#ff6b35" stroke-width="2" /> <path d="M 100 90 A 10 10 0 0 0 100 80" fill="none" stroke="#ff6b35" stroke-width="2" /> <circle cx="90" cy="90" r="3" fill="#0066ff" /> <text x="65" y="95" font-size="14" font-weight="bold" fill="#ff6b35">
+          ∠AOB
+         </text>
+        </svg>
+       </div>
+       <p class="text-gray-700 mb-4"><strong>Definisi:</strong> Sudut pusat adalah sudut yang dibentuk oleh dua jari-jari lingkaran dengan titik sudut di pusat lingkaran.</p>
+       <p class="text-gray-700 mb-4"><strong>Rumus:</strong> Besar sudut pusat = (Panjang busur / Keliling lingkaran) × 360°</p>
+       <p class="text-gray-700"><strong>Contoh:</strong> Jika busur AB = 10 cm dan keliling lingkaran = 60 cm, maka sudut pusat ∠AOB = (10/60) × 360° = 60°</p>
+      </div><!-- Sudut Keliling -->
+      <div class="card-hover bg-white p-8 rounded-xl shadow-md border-t-4 border-green-600">
+       <h3 class="text-2xl font-bold text-green-900 mb-4">2. Sudut Keliling</h3>
+       <div class="mb-6 flex justify-center">
+        <svg width="180" height="180" viewbox="0 0 180 180"><circle cx="90" cy="90" r="70" fill="none" stroke="#0066ff" stroke-width="2" /> <line x1="30" y1="90" x2="90" y2="25" stroke="#00d084" stroke-width="2" /> <line x1="30" y1="90" x2="155" y2="90" stroke="#00d084" stroke-width="2" /> <circle cx="30" cy="90" r="3" fill="#00d084" /> <text x="10" y="95" font-size="14" font-weight="bold" fill="#00d084">
+          ∠ACB
+         </text>
+        </svg>
+       </div>
+       <p class="text-gray-700 mb-4"><strong>Definisi:</strong> Sudut keliling adalah sudut yang dibentuk oleh dua tali busur dengan titik sudut di keliling lingkaran.</p>
+       <p class="text-gray-700 mb-4"><strong>Rumus:</strong> Sudut keliling = ½ × Sudut pusat (jika menghadap busur yang sama)</p>
+       <p class="text-gray-700"><strong>Contoh:</strong> Jika sudut pusat ∠AOB = 80°, maka sudut keliling ∠ACB = ½ × 80° = 40°</p>
+      </div><!-- Garis Singgung -->
+      <div class="card-hover bg-white p-8 rounded-xl shadow-md border-t-4 border-purple-600">
+       <h3 class="text-2xl font-bold text-purple-900 mb-4">3. Garis Singgung Dua Lingkaran</h3>
+       <div class="mb-6 flex justify-center">
+        <svg width="180" height="150" viewbox="0 0 180 150"><circle cx="50" cy="75" r="40" fill="none" stroke="#0066ff" stroke-width="2" /> <circle cx="130" cy="75" r="40" fill="none" stroke="#0066ff" stroke-width="2" /> <line x1="15" y1="30" x2="165" y2="30" stroke="#9d4edd" stroke-width="2" /> <line x1="15" y1="120" x2="165" y2="120" stroke="#9d4edd" stroke-width="2" /> <circle cx="50" cy="75" r="2" fill="#0066ff" /> <circle cx="130" cy="75" r="2" fill="#0066ff" />
+        </svg>
+       </div>
+       <p class="text-gray-700 mb-4"><strong>Definisi:</strong> Garis singgung adalah garis yang menyentuh lingkaran tepat di satu titik dan tegak lurus dengan jari-jari.</p>
+       <p class="text-gray-700 mb-4"><strong>Jenis Garis Singgung Persekutuan:</strong></p>
+       <ul class="text-gray-700 space-y-2">
+        <li>• <strong>Luar:</strong> Garis yang tidak memotong daerah antara dua lingkaran</li>
+        <li>• <strong>Dalam:</strong> Garis yang memotong daerah antara dua lingkaran</li>
+       </ul>
+      </div><!-- Dua Tali Busur -->
+      <div class="card-hover bg-white p-8 rounded-xl shadow-md border-t-4 border-red-600">
+       <h3 class="text-2xl font-bold text-red-900 mb-4">4. Dua Tali Busur</h3>
+       <div class="mb-6 flex justify-center">
+        <svg width="180" height="180" viewbox="0 0 180 180"><circle cx="90" cy="90" r="70" fill="none" stroke="#0066ff" stroke-width="2" /> <line x1="40" y1="90" x2="140" y2="90" stroke="#ff6b35" stroke-width="2" /> <line x1="90" y1="30" x2="90" y2="150" stroke="#ff6b35" stroke-width="2" /> <circle cx="90" cy="90" r="4" fill="#ff6b35" /> <text x="95" y="85" font-size="12" font-weight="bold" fill="#ff6b35">
+          P
+         </text>
+        </svg>
+       </div>
+       <p class="text-gray-700 mb-4"><strong>Definisi:</strong> Tali busur adalah garis yang menghubungkan dua titik pada lingkaran.</p>
+       <p class="text-gray-700 mb-4"><strong>Sifat:</strong> Ketika dua tali busur berpotongan di dalam lingkaran, produk panjang bagian-bagiannya sama.</p>
+       <p class="text-gray-700"><strong>Rumus:</strong> AP × PB = CP × PD (jika AB dan CD berpotongan di titik P)</p>
+      </div>
+     </div>
+     <div class="bg-gradient-to-r from-yellow-100 to-orange-100 p-8 rounded-xl border-l-4 border-yellow-600">
+      <h4 class="text-xl font-bold text-yellow-900 mb-4">💡 Ringkasan Hubungan Sudut Pusat dan Sudut Keliling</h4>
+      <ul class="text-gray-800 space-y-3">
+       <li><strong>1.</strong> Sudut keliling = ½ × Sudut pusat (jika menghadap busur yang sama)</li>
+       <li><strong>2.</strong> Sudut keliling yang menghadap diameter = 90°</li>
+       <li><strong>3.</strong> Sudut-sudut keliling yang menghadap busur yang sama = sama besar</li>
+      </ul>
+     </div>
+    </div>
+   </section><!-- Section: Aplikasi STEM -->
+   <section id="aplikasi" class="section-content min-h-screen hidden bg-gradient-to-b from-blue-50 to-green-50">
+    <div class="max-w-7xl mx-auto px-4 py-16">
+     <h2 class="text-4xl font-bold text-blue-900 mb-12 text-center">🏗️ Aplikasi Lingkaran dalam Kehidupan Sehari-hari</h2>
+     <div class="grid md:grid-cols-2 gap-8"><!-- Crane -->
+      <div class="card-hover bg-white p-8 rounded-xl shadow-lg border-l-4 border-blue-600 slide-in">
+       <h3 class="text-2xl font-bold text-blue-900 mb-4">🏗️ Crane (Derek Bangunan)</h3>
+       <div class="mb-6 bg-blue-100 p-4 rounded-lg h-40 flex items-center justify-center">
+        <svg width="140" height="140" viewbox="0 0 140 140"><rect x="60" y="70" width="20" height="60" fill="#333" /> <circle cx="70" cy="70" r="12" fill="#0066ff" /> <line x1="70" y1="58" x2="120" y2="30" stroke="#666" stroke-width="2" /> <rect x="115" y="25" width="15" height="15" fill="#ff6b35" /> <line x1="70" y1="70" x2="70" y2="120" stroke="#999" stroke-width="2" />
+        </svg>
+       </div>
+       <p class="text-gray-700 mb-4"><strong>Konsep Lingkaran yang Digunakan:</strong></p>
+       <p class="text-gray-700 mb-4">Pada poros (pusat) yang merupakan titik pusat lingkaran, terjadi rotasi dengan radius berupa panjang lengan derek. Sudut rotasi menentukan pergerakan beban.</p>
+       <p class="text-gray-700 mb-4"><strong>Analisis Kritis:</strong> Bagaimana sudut pusat mempengaruhi jarak horizontal dari tempat awal ke tempat akhir beban?</p>
+       <div class="bg-blue-50 p-4 rounded-lg">
+        <p class="text-sm text-gray-700"><strong>💭 Pertanyaan:</strong> Jika lengan derek berputar 90°, ke arah mana beban berpindah? Bagaimana jika berputar 180°?</p>
+       </div>
+      </div><!-- Excavator -->
+      <div class="card-hover bg-white p-8 rounded-xl shadow-lg border-l-4 border-green-600 slide-in delay-1">
+       <h3 class="text-2xl font-bold text-green-900 mb-4">🚜 Excavator (Alat Gali)</h3>
+       <div class="mb-6 bg-green-100 p-4 rounded-lg h-40 flex items-center justify-center">
+        <svg width="140" height="120" viewbox="0 0 140 120"><rect x="20" y="80" width="100" height="20" fill="#333" /> <circle cx="35" cy="80" r="8" fill="#666" /> <circle cx="105" cy="80" r="8" fill="#666" /> <rect x="40" y="50" width="60" height="30" fill="#ff6b35" opacity="0.8" /> <circle cx="70" cy="50" r="6" fill="#0066ff" /> <line x1="70" y1="56" x2="100" y2="20" stroke="#ff6b35" stroke-width="3" /> <circle cx="100" cy="20" r="4" fill="#00d084" />
+        </svg>
+       </div>
+       <p class="text-gray-700 mb-4"><strong>Konsep Lingkaran yang Digunakan:</strong></p>
+       <p class="text-gray-700 mb-4">Lengan excavator bergerak melingkar dengan poros di tubuh utama. Setiap sendi merupakan pusat rotasi dengan radius berbeda, membentuk rangkaian gerak melingkar.</p>
+       <p class="text-gray-700 mb-4"><strong>Analisis Kritis:</strong> Bagaimana kombinasi sudut pusat dari setiap sendi menghasilkan gerakan kompleks?</p>
+       <div class="bg-green-50 p-4 rounded-lg">
+        <p class="text-sm text-gray-700"><strong>💭 Pertanyaan:</strong> Jika satu sendi berputar 45°, bagaimana posisi ujung excavator berubah?</p>
+       </div>
+      </div><!-- Roda Kendaraan -->
+      <div class="card-hover bg-white p-8 rounded-xl shadow-lg border-l-4 border-purple-600 slide-in delay-2">
+       <h3 class="text-2xl font-bold text-purple-900 mb-4">🚗 Sistem Roda Kendaraan</h3>
+       <div class="mb-6 bg-purple-100 p-4 rounded-lg h-40 flex items-center justify-center">
+        <svg width="140" height="80" viewbox="0 0 140 80"><rect x="20" y="40" width="100" height="20" fill="#333" /> <circle cx="40" cy="60" r="20" fill="none" stroke="#0066ff" stroke-width="3" /> <circle cx="40" cy="60" r="3" fill="#0066ff" /> <circle cx="100" cy="60" r="20" fill="none" stroke="#0066ff" stroke-width="3" /> <circle cx="100" cy="60" r="3" fill="#0066ff" /> <line x1="40" y1="40" x2="40" y2="30" stroke="#666" stroke-width="2" /> <line x1="40" y1="40" x2="35" y2="32" stroke="#666" stroke-width="2" />
+        </svg>
+       </div>
+       <p class="text-gray-700 mb-4"><strong>Konsep Lingkaran yang Digunakan:</strong></p>
+       <p class="text-gray-700 mb-4">Roda adalah bentuk lingkaran sempurna. Ketika roda berputar, setiap titik pada roda menjalani gerak melingkar dengan pusat di as (axle) roda.</p>
+       <p class="text-gray-700 mb-4"><strong>Analisis Kritis:</strong> Hubungan antara jari-jari roda, keliling, dan jarak tempuh kendaraan.</p>
+       <div class="bg-purple-50 p-4 rounded-lg">
+        <p class="text-sm text-gray-700"><strong>💭 Pertanyaan:</strong> Jika roda berputar 10 kali penuh, berapa jarak yang ditempuh? (Gunakan rumus keliling = 2πr)</p>
+       </div>
+      </div><!-- Mesin -->
+      <div class="card-hover bg-white p-8 rounded-xl shadow-lg border-l-4 border-red-600 slide-in delay-3">
+       <h3 class="text-2xl font-bold text-red-900 mb-4">⚙️ Mekanisme Putaran Mesin</h3>
+       <div class="mb-6 bg-red-100 p-4 rounded-lg h-40 flex items-center justify-center">
+        <svg width="140" height="120" viewbox="0 0 140 120"><circle cx="50" cy="60" r="30" fill="none" stroke="#0066ff" stroke-width="2" /> <circle cx="50" cy="60" r="4" fill="#0066ff" /> <circle cx="100" cy="60" r="25" fill="none" stroke="#ff6b35" stroke-width="2" /> <circle cx="100" cy="60" r="3" fill="#ff6b35" /> <line x1="80" y1="60" x2="75" y2="60" stroke="#666" stroke-width="2" /> <circle cx="50" cy="30" r="2" fill="#666" /> <circle cx="50" cy="90" r="2" fill="#666" /> <circle cx="100" cy="35" r="2" fill="#666" /> <circle cx="100" cy="85" r="2" fill="#666" />
+        </svg>
+       </div>
+       <p class="text-gray-700 mb-4"><strong>Konsep Lingkaran yang Digunakan:</strong></p>
+       <p class="text-gray-700 mb-4">Roda gigi dan pulley memanfaatkan gerak melingkar untuk transmisi daya. Garis singgung antar gigi/pulley menentukan kecepatan rotasi relatif.</p>
+       <p class="text-gray-700 mb-4"><strong>Analisis Kritis:</strong> Bagaimana rasio diameter mempengaruhi kecepatan dan torsi?</p>
+       <div class="bg-red-50 p-4 rounded-lg">
+        <p class="text-sm text-gray-700"><strong>💭 Pertanyaan:</strong> Jika roda gigi A (r=10cm) menggerakkan roda gigi B (r=5cm), berapa kali lebih cepat B berputar?</p>
+       </div>
+      </div>
+     </div>
+     <div class="mt-12 bg-gradient-to-r from-indigo-600 to-blue-600 text-white p-8 rounded-xl shadow-lg">
+      <h4 class="text-2xl font-bold mb-4">🔬 Tantangan STEM untuk Berpikir Kritis</h4>
+      <p class="mb-4">Desain sebuah sistem sederhana yang menggabungkan konsep lingkaran untuk menyelesaikan masalah tertentu. Contoh:</p>
+      <ul class="space-y-3 ml-6">
+       <li>• Bagaimana cara meningkatkan efisiensi kerja crane dengan mengoptimalkan sudut rotasi?</li>
+       <li>• Jika excavator memiliki 3 sendi yang dapat berputar, berapa banyak posisi berbeda yang dapat dicapai?</li>
+       <li>• Bagaimana perubahan jari-jari roda mempengaruhi kecepatan dan torsi kendaraan?</li>
+      </ul>
+     </div>
+    </div>
+   </section><!-- Section: Video -->
+   <section id="video" class="section-content min-h-screen hidden bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 py-16">
+     <h2 class="text-4xl font-bold text-blue-900 mb-12 text-center">🎥 Pembelajaran Video</h2>
+     <div class="grid md:grid-cols-2 gap-8 mb-12">
+      <div class="card-hover bg-white rounded-xl overflow-hidden shadow-lg slide-in">
+       <div class="bg-gray-300 aspect-video flex items-center justify-center relative">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-800 opacity-80"></div><button class="text-white text-6xl hover:scale-110 transition" onclick="window.open('https://www.youtube.com/results?search_query=sudut+pusat+lingkaran+matematika', '_blank')" title="Buka video di YouTube">▶️</button>
+       </div>
+       <div class="p-6">
+        <h3 class="text-xl font-bold text-blue-900 mb-2">Sudut Pusat dan Sudut Keliling</h3>
+        <p class="text-gray-700 mb-4">Video penjelasan lengkap tentang hubungan sudut pusat dan sudut keliling lingkaran dengan visualisasi interaktif.</p><a href="https://www.youtube.com/results?search_query=sudut+pusat+lingkaran+matematika" target="_blank" rel="noopener noreferrer" class="inline-block btn-primary text-white px-6 py-2 rounded-lg font-semibold">Tonton di YouTube →</a>
+       </div>
+      </div>
+      <div class="card-hover bg-white rounded-xl overflow-hidden shadow-lg slide-in delay-1">
+       <div class="bg-gray-300 aspect-video flex items-center justify-center relative">
+        <div class="absolute inset-0 bg-gradient-to-br from-green-600 to-green-800 opacity-80"></div><button class="text-white text-6xl hover:scale-110 transition" onclick="window.open('https://www.youtube.com/results?search_query=garis+singgung+lingkaran+matematika', '_blank')" title="Buka video di YouTube">▶️</button>
+       </div>
+       <div class="p-6">
+        <h3 class="text-xl font-bold text-green-900 mb-2">Garis Singgung Lingkaran</h3>
+        <p class="text-gray-700 mb-4">Memahami definisi, sifat, dan aplikasi garis singgung pada satu lingkaran dan dua lingkaran.</p><a href="https://www.youtube.com/results?search_query=garis+singgung+lingkaran+matematika" target="_blank" rel="noopener noreferrer" class="inline-block btn-primary text-white px-6 py-2 rounded-lg font-semibold">Tonton di YouTube →</a>
+       </div>
+      </div>
+      <div class="card-hover bg-white rounded-xl overflow-hidden shadow-lg slide-in delay-2">
+       <div class="bg-gray-300 aspect-video flex items-center justify-center relative">
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-600 to-purple-800 opacity-80"></div><button class="text-white text-6xl hover:scale-110 transition" onclick="window.open('https://www.youtube.com/results?search_query=tali+busur+lingkaran+matematika', '_blank')" title="Buka video di YouTube">▶️</button>
+       </div>
+       <div class="p-6">
+        <h3 class="text-xl font-bold text-purple-900 mb-2">Tali Busur dan Busur Lingkaran</h3>
+        <p class="text-gray-700 mb-4">Eksplorasi konsep tali busur, hubungan antara dua tali busur, dan aplikasinya dalam geometri.</p><a href="https://www.youtube.com/results?search_query=tali+busur+lingkaran+matematika" target="_blank" rel="noopener noreferrer" class="inline-block btn-primary text-white px-6 py-2 rounded-lg font-semibold">Tonton di YouTube →</a>
+       </div>
+      </div>
+      <div class="card-hover bg-white rounded-xl overflow-hidden shadow-lg slide-in delay-3">
+       <div class="bg-gray-300 aspect-video flex items-center justify-center relative">
+        <div class="absolute inset-0 bg-gradient-to-br from-red-600 to-red-800 opacity-80"></div><button class="text-white text-6xl hover:scale-110 transition" onclick="window.open('https://www.youtube.com/results?search_query=aplikasi+lingkaran+teknologi+STEM', '_blank')" title="Buka video di YouTube">▶️</button>
+       </div>
+       <div class="p-6">
+        <h3 class="text-xl font-bold text-red-900 mb-2">Aplikasi Lingkaran dalam Teknologi</h3>
+        <p class="text-gray-700 mb-4">Melihat bagaimana konsep lingkaran diterapkan dalam alat-alat modern seperti crane, excavator, dan mesin industri.</p><a href="https://www.youtube.com/results?search_query=aplikasi+lingkaran+teknologi+STEM" target="_blank" rel="noopener noreferrer" class="inline-block btn-primary text-white px-6 py-2 rounded-lg font-semibold">Tonton di YouTube →</a>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Section: Soal -->
+   <section id="soal" class="section-content min-h-screen hidden bg-gradient-to-b from-yellow-50 to-orange-50">
+    <div class="max-w-7xl mx-auto px-4 py-16">
+     <h2 class="text-4xl font-bold text-blue-900 mb-12 text-center">✏️ Latihan Soal dan Berpikir Kritis</h2>
+     <div class="space-y-8"><!-- Soal 1: Pemahaman Konsep -->
+      <div class="card-hover bg-white p-8 rounded-xl shadow-md border-l-4 border-blue-600 slide-in">
+       <div class="flex items-start gap-4"><span class="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold text-lg flex-shrink-0">1</span>
+        <div class="flex-grow">
+         <h4 class="text-xl font-bold text-blue-900 mb-3">Soal Pemahaman Konsep</h4>
+         <p class="text-gray-700 mb-4">Pada lingkaran dengan pusat O, sudut pusat ∠AOB = 60°. Jika titik C terletak pada keliling lingkaran sehingga ∠ACB adalah sudut keliling yang menghadap busur AB yang sama, tentukan besar ∠ACB!</p>
+         <div class="bg-blue-50 p-4 rounded-lg mb-4">
+          <p class="text-gray-700"><strong>Jawaban Anda:</strong></p><textarea class="w-full mt-2 p-3 border-2 border-blue-300 rounded-lg focus:outline-none focus:border-blue-600" rows="3" placeholder="Tuliskan jawaban Anda di sini..."></textarea>
+         </div>
+         <details class="bg-green-50 p-4 rounded-lg"><summary class="cursor-pointer font-bold text-green-900">📋 Lihat Pembahasan</summary>
+          <p class="mt-3 text-gray-700">Karena sudut keliling = ½ × sudut pusat (ketika menghadap busur yang sama), maka:<br><br>
+           ∠ACB = ½ × ∠AOB = ½ × 60° = <strong>30°</strong></p>
+         </details>
+        </div>
+       </div>
+      </div><!-- Soal 2: Analisis -->
+      <div class="card-hover bg-white p-8 rounded-xl shadow-md border-l-4 border-green-600 slide-in delay-1">
+       <div class="flex items-start gap-4"><span class="bg-green-600 text-white px-4 py-2 rounded-lg font-bold text-lg flex-shrink-0">2</span>
+        <div class="flex-grow">
+         <h4 class="text-xl font-bold text-green-900 mb-3">Soal Analisis</h4>
+         <p class="text-gray-700 mb-4">Dua tali busur AB dan CD berpotongan di titik P di dalam lingkaran. Jika AP = 6 cm, PB = 8 cm, dan CP = 4 cm, tentukan panjang PD!</p>
+         <div class="bg-green-50 p-4 rounded-lg mb-4">
+          <p class="text-gray-700"><strong>Jawaban Anda:</strong></p><textarea class="w-full mt-2 p-3 border-2 border-green-300 rounded-lg focus:outline-none focus:border-green-600" rows="3" placeholder="Tuliskan jawaban Anda di sini..."></textarea>
+         </div>
+         <details class="bg-green-50 p-4 rounded-lg"><summary class="cursor-pointer font-bold text-green-900">📋 Lihat Pembahasan</summary>
+          <p class="mt-3 text-gray-700">Gunakan sifat: AP × PB = CP × PD<br><br>
+           6 × 8 = 4 × PD<br>
+           48 = 4 × PD<br>
+           PD = 48 ÷ 4 = <strong>12 cm</strong></p>
+         </details>
+        </div>
+       </div>
+      </div><!-- Soal 3: STEM Application - Crane -->
+      <div class="card-hover bg-white p-8 rounded-xl shadow-md border-l-4 border-purple-600 slide-in delay-2">
+       <div class="flex items-start gap-4"><span class="bg-purple-600 text-white px-4 py-2 rounded-lg font-bold text-lg flex-shrink-0">3</span>
+        <div class="flex-grow">
+         <h4 class="text-xl font-bold text-purple-900 mb-3">Soal Aplikasi: Crane di Pelabuhan</h4>
+         <p class="text-gray-700 mb-4">Sebuah crane di pelabuhan memiliki lengan sepanjang 20 meter. Lengan ini berputar dari posisi 0° (arah timur) ke posisi 90° (arah utara). Jika beban tergantung di ujung lengan, hitunglah:</p>
+         <ol class="text-gray-700 mb-4 ml-6 space-y-2">
+          <li>a) Jarak yang ditempuh ujung lengan selama rotasi (gunakan rumus busur)</li>
+          <li>b) Posisi awal dan akhir beban (nyatakan dalam koordinat)</li>
+          <li>c) Jarak garis lurus dari posisi awal ke posisi akhir beban</li>
+         </ol>
+         <div class="bg-purple-50 p-4 rounded-lg mb-4">
+          <p class="text-gray-700"><strong>Jawaban Anda:</strong></p><textarea class="w-full mt-2 p-3 border-2 border-purple-300 rounded-lg focus:outline-none focus:border-purple-600" rows="4" placeholder="Tuliskan jawaban lengkap Anda..."></textarea>
+         </div>
+         <details class="bg-purple-50 p-4 rounded-lg"><summary class="cursor-pointer font-bold text-purple-900">📋 Lihat Pembahasan</summary>
+          <p class="mt-3 text-gray-700 space-y-2"><span><strong>a) Panjang busur:</strong> s = (θ/360°) × 2πr = (90°/360°) × 2π(20) = (1/4) × 40π = 10π ≈ 31.4 meter</span><br><br><span><strong>b) Posisi:</strong> Awal: (20, 0), Akhir: (0, 20)</span><br><br><span><strong>c) Jarak lurus:</strong> d = √[(20-0)² + (0-20)²] = √800 = 20√2 ≈ 28.3 meter</span></p>
+         </details>
+        </div>
+       </div>
+      </div><!-- Soal 4: STEM Application - Roda -->
+      <div class="card-hover bg-white p-8 rounded-xl shadow-md border-l-4 border-red-600 slide-in delay-3">
+       <div class="flex items-start gap-4"><span class="bg-red-600 text-white px-4 py-2 rounded-lg font-bold text-lg flex-shrink-0">4</span>
+        <div class="flex-grow">
+         <h4 class="text-xl font-bold text-red-900 mb-3">Soal Aplikasi: Sistem Roda Gigi</h4>
+         <p class="text-gray-700 mb-4">Sebuah sistem transmisi memiliki dua roda gigi. Roda gigi A memiliki jari-jari 10 cm dan berputar dengan kecepatan 60 RPM. Roda gigi B memiliki jari-jari 15 cm dan bersinggungan dengan roda gigi A. Hitunglah:</p>
+         <ol class="text-gray-700 mb-4 ml-6 space-y-2">
+          <li>a) Kecepatan linear di tepi roda gigi A</li>
+          <li>b) Kecepatan rotasi roda gigi B (dalam RPM)</li>
+          <li>c) Rasio kecepatan antara roda A dan roda B</li>
+         </ol>
+         <div class="bg-red-50 p-4 rounded-lg mb-4">
+          <p class="text-gray-700"><strong>Jawaban Anda:</strong></p><textarea class="w-full mt-2 p-3 border-2 border-red-300 rounded-lg focus:outline-none focus:border-red-600" rows="4" placeholder="Tuliskan jawaban lengkap Anda..."></textarea>
+         </div>
+         <details class="bg-red-50 p-4 rounded-lg"><summary class="cursor-pointer font-bold text-red-900">📋 Lihat Pembahasan</summary>
+          <p class="mt-3 text-gray-700 space-y-2"><span><strong>a) Kecepatan linear roda A:</strong> v = ωr = (60 × 2π/60) × 0.1 = 0.2π ≈ 0.628 m/s</span><br><br><span><strong>b) Kecepatan roda B:</strong> v_A = v_B → rA × ωA = rB × ωB → 10 × 60 = 15 × ωB → ωB = 40 RPM</span><br><br><span><strong>c) Rasio kecepatan:</strong> ωA/ωB = 60/40 = 1.5 (Roda A berputar 1.5 kali lebih cepat dari roda B)</span></p>
+         </details>
+        </div>
+       </div>
+      </div><!-- Soal 5: Berpikir Kritis -->
+      <div class="card-hover bg-white p-8 rounded-xl shadow-md border-l-4 border-indigo-600 slide-in delay-4">
+       <div class="flex items-start gap-4"><span class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-bold text-lg flex-shrink-0">5</span>
+        <div class="flex-grow">
+         <h4 class="text-xl font-bold text-indigo-900 mb-3">Soal Berpikir Kritis - STEM Challenge</h4>
+         <p class="text-gray-700 mb-4"><strong>Desain Alat Pengangkat Otomatis:</strong></p>
+         <p class="text-gray-700 mb-4">Anda diminta merancang sistem pengangkat otomatis untuk gudang. Sistem ini terdiri dari:</p>
+         <ul class="text-gray-700 mb-4 ml-6 space-y-2">
+          <li>• Motor penggerak utama (pusat rotasi)</li>
+          <li>• Lengan panjang yang dapat berputar dengan sudut maksimal 360°</li>
+          <li>• Roda pulley untuk mengangkat beban</li>
+         </ul>
+         <p class="text-gray-700 mb-4">Pertanyaan:</p>
+         <ol class="text-gray-700 mb-4 ml-6 space-y-2">
+          <li>1) Bagaimana konsep lingkaran dan sudut pusat membantu mengoptimalkan jangkauan alat ini?</li>
+          <li>2) Jika lengan berputar dengan kecepatan sudut konstan 10°/detik, berapa waktu yang diperlukan untuk satu rotasi penuh?</li>
+          <li>3) Bagaimana Anda menentukan panjang lengan optimal untuk menjangkau seluruh area gudang?</li>
+          <li>4) Jelaskan bagaimana sistem roda gigi dapat meningkatkan efisiensi pengangkat!</li>
+         </ol>
+         <div class="bg-indigo-50 p-4 rounded-lg">
+          <p class="text-gray-700"><strong>Refleksi Anda:</strong></p><textarea class="w-full mt-2 p-3 border-2 border-indigo-300 rounded-lg focus:outline-none focus:border-indigo-600" rows="5" placeholder="Tuliskan refleksi dan solusi Anda tentang permasalahan STEM ini..."></textarea>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Section: Presensi -->
+   <section id="presensi" class="section-content min-h-screen hidden bg-gradient-to-b from-green-50 to-blue-50">
+    <div class="max-w-4xl mx-auto px-4 py-16">
+     <h2 class="text-4xl font-bold text-blue-900 mb-12 text-center">📋 Presensi Kehadiran</h2>
+     <div class="bg-white p-10 rounded-xl shadow-lg">
+      <form id="presensiForm" class="space-y-6">
+       <div class="grid md:grid-cols-2 gap-6">
+        <div><label for="nama" class="block text-lg font-bold text-gray-800 mb-3">Nama Lengkap <span class="text-red-600">*</span></label> <input type="text" id="nama" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 transition" placeholder="Masukkan nama lengkap Anda" required>
+        </div>
+        <div><label for="kelas" class="block text-lg font-bold text-gray-800 mb-3">Kelas <span class="text-red-600">*</span></label> <input type="text" id="kelas" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 transition" placeholder="Contoh: 8A atau 9B" required>
+        </div>
+       </div>
+       <div><label for="tanda_tangan" class="block text-lg font-bold text-gray-800 mb-3">Tanda Tangan Digital <span class="text-red-600">*</span></label>
+        <div class="border-2 border-gray-300 rounded-lg overflow-hidden bg-white">
+         <canvas id="tanda_tangan" class="w-full" width="600" height="200" style="cursor: crosshair; display: block; background: white;"></canvas>
+        </div><button type="button" onclick="clearSignature()" class="mt-3 text-sm btn-secondary text-white px-4 py-2 rounded-lg font-semibold">Hapus Tanda Tangan</button>
+       </div>
+       <div><label for="foto" class="block text-lg font-bold text-gray-800 mb-3">Upload Foto <span class="text-red-600">*</span></label>
+        <div class="border-2 border-dashed border-blue-400 rounded-lg p-6 text-center bg-blue-50"><input type="file" id="foto" accept="image/*" class="hidden" onchange="handlePhotoUpload(event)" required> <label for="foto" class="cursor-pointer">
+          <div class="text-4xl mb-2">
+           📸
+          </div><p class="text-gray-700 font-semibold mb-2">Klik untuk unggah foto atau seret foto di sini</p><p class="text-sm text-gray-500">Format: JPG, PNG (Maksimal 5MB)</p></label>
+         <div id="fotoPreview" class="mt-4"></div>
+        </div>
+       </div>
+       <div class="flex gap-4"><button type="submit" id="submitBtn" class="flex-1 btn-primary text-white px-6 py-4 rounded-lg font-bold text-lg hover:shadow-lg transition">Simpan Presensi</button> <button type="button" onclick="resetForm()" class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-4 rounded-lg font-bold text-lg transition">Reset Form</button>
+       </div>
+       <div id="statusMessage" class="hidden p-4 rounded-lg text-center font-semibold"></div>
+      </form>
+     </div>
+     <div class="mt-12">
+      <h3 class="text-2xl font-bold text-blue-900 mb-6">Daftar Presensi</h3>
+      <div id="presensiList" class="bg-white rounded-xl shadow-lg overflow-hidden">
+       <div class="p-8 text-center text-gray-500">
+        <p class="text-lg">Belum ada data presensi. Silakan isi form di atas untuk menambahkan presensi.</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="bg-gradient-to-r from-blue-900 to-blue-700 text-white mt-16">
+    <div class="max-w-7xl mx-auto px-4 py-12">
+     <div class="grid md:grid-cols-3 gap-8 mb-8">
+      <div>
+       <h4 class="text-xl font-bold mb-4">Tentang Pembelajaran Ini</h4>
+       <p class="text-blue-100">Platform pembelajaran interaktif untuk memahami konsep lingkaran dengan pendekatan STEM dan berpikir kritis.</p>
+      </div>
+      <div>
+       <h4 class="text-xl font-bold mb-4">Materi Pembelajaran</h4>
+       <ul class="text-blue-100 space-y-2">
+        <li>• Sudut Pusat &amp; Keliling</li>
+        <li>• Garis Singgung</li>
+        <li>• Tali Busur</li>
+        <li>• Aplikasi Teknologi</li>
+       </ul>
+      </div>
+      <div>
+       <h4 class="text-xl font-bold mb-4">Konten Tambahan</h4>
+       <ul class="text-blue-100 space-y-2">
+        <li>• Video Pembelajaran</li>
+        <li>• Latihan Soal HOTS</li>
+        <li>• Challenges STEM</li>
+        <li>• Sistem Presensi</li>
+       </ul>
+      </div>
+     </div>
+     <div class="border-t border-blue-600 pt-8 text-center text-blue-100">
+      <p>© 2024 Platform Pembelajaran Lingkaran STEM. Dirancang untuk meningkatkan literasi STEM dan berpikir kritis siswa.</p>
+      <p class="mt-2 text-sm">Dengan dukungan teknologi dan inovasi pendidikan</p>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script>
+        // Deklarasi variable global
+        let dataHandler, currentSignature = null, presensiData = [];
+
+        // Implementasi DataHandler
+        dataHandler = {
+            onDataChanged(data) {
+                presensiData = data;
+                renderPresensiList(data);
+            }
+        };
+
+        // Initialize SDKs
+        async function initSDKs() {
+            // Element SDK
+            const defaultConfig = {
+                judul_website: "Pembelajaran Lingkaran Berbasis STEM",
+                deskripsi_beranda: "Jelajahi konsep lingkaran melalui pendekatan STEM yang mengubah pembelajaran matematika menjadi petualangan penyelidikan. Temukan bagaimana lingkaran bekerja di balik teknologi dan mesin yang kita gunakan setiap hari.",
+                primary_color: "#0066ff",
+                secondary_color: "#00d084",
+                background_color: "#f5f7fa"
+            };
+
+            const config = { ...defaultConfig };
+
+            if (window.elementSdk) {
+                window.elementSdk.init({
+                    defaultConfig,
+                    onConfigChange: async (newConfig) => {
+                        Object.assign(config, newConfig);
+                        updateUIWithConfig(config);
+                    },
+                    mapToCapabilities: (cfg) => ({
+                        recolorables: [
+                            {
+                                get: () => cfg.primary_color || defaultConfig.primary_color,
+                                set: (value) => {
+                                    config.primary_color = value;
+                                    window.elementSdk.setConfig({ primary_color: value });
+                                }
+                            },
+                            {
+                                get: () => cfg.secondary_color || defaultConfig.secondary_color,
+                                set: (value) => {
+                                    config.secondary_color = value;
+                                    window.elementSdk.setConfig({ secondary_color: value });
+                                }
+                            }
+                        ],
+                        borderables: [],
+                        fontEditable: undefined,
+                        fontSizeable: undefined
+                    }),
+                    mapToEditPanelValues: (cfg) => new Map([
+                        ["judul_website", cfg.judul_website || defaultConfig.judul_website],
+                        ["deskripsi_beranda", cfg.deskripsi_beranda || defaultConfig.deskripsi_beranda]
+                    ])
+                });
+            }
+
+            // Data SDK
+            if (window.dataSdk) {
+                const initResult = await window.dataSdk.init(dataHandler);
+                if (!initResult.isOk) {
+                    console.error("Failed to initialize Data SDK");
+                }
+            }
+
+            setupCanvasSignature();
+        }
+
+        function updateUIWithConfig(config) {
+            document.getElementById('judul-utama').textContent = config.judul_website;
+            document.getElementById('deskripsi-beranda').textContent = config.deskripsi_beranda;
+            document.getElementById('nav-title').textContent = config.judul_website.split(' ').slice(0, 2).join(' ');
+        }
+
+        // Switch sections
+        function switchSection(sectionId) {
+            const sections = document.querySelectorAll('.section-content');
+            sections.forEach(section => section.classList.add('hidden'));
+            document.getElementById(sectionId).classList.remove('hidden');
+
+            // Update nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('nav-active'));
+            event.target.classList.add('nav-active');
+
+            // Scroll to top
+            document.querySelector('.app-wrapper').scrollTop = 0;
+        }
+
+        // Canvas untuk tanda tangan
+        function setupCanvasSignature() {
+            const canvas = document.getElementById('tanda_tangan');
+            const ctx = canvas.getContext('2d');
+            let isDrawing = false;
+
+            canvas.addEventListener('mousedown', () => isDrawing = true);
+            canvas.addEventListener('mouseup', () => {
+                isDrawing = false;
+                ctx.beginPath();
+            });
+            canvas.addEventListener('mousemove', (e) => {
+                if (!isDrawing) return;
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                ctx.lineWidth = 2;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                ctx.strokeStyle = '#0066ff';
+                ctx.lineTo(x, y);
+                ctx.stroke();
+            });
+        }
+
+        function clearSignature() {
+            const canvas = document.getElementById('tanda_tangan');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            currentSignature = null;
+        }
+
+        function handlePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (file && file.size <= 5 * 1024 * 1024) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    document.getElementById('fotoPreview').innerHTML = `<img src="${e.target.result}" style="max-width: 200px; max-height: 200px; border-radius: 8px; margin-top: 10px;">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('presensiForm').reset();
+            clearSignature();
+            document.getElementById('fotoPreview').innerHTML = '';
+            document.getElementById('statusMessage').classList.add('hidden');
+        }
+
+        // Submit presensi
+        document.getElementById('presensiForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const nama = document.getElementById('nama').value;
+            const kelas = document.getElementById('kelas').value;
+            const canvas = document.getElementById('tanda_tangan');
+            const foto = document.getElementById('foto').files[0];
+
+            if (!nama || !kelas) {
+                showStatus('Mohon isi semua data yang diperlukan!', 'error');
+                return;
+            }
+
+            if (canvas.width === 0 || !hasSignature()) {
+                showStatus('Mohon tambahkan tanda tangan!', 'error');
+                return;
+            }
+
+            if (!foto) {
+                showStatus('Mohon unggah foto!', 'error');
+                return;
+            }
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="loading-spinner"></span> Menyimpan...';
+
+            const waktuPresensi = new Date().toISOString();
+
+            try {
+                if (window.dataSdk) {
+                    const result = await window.dataSdk.create({
+                        nama,
+                        kelas,
+                        tanda_tangan: canvas.toDataURL(),
+                        waktu_presensi: waktuPresensi
+                    });
+
+                    if (result.isOk) {
+                        showStatus('✓ Presensi berhasil disimpan!', 'success');
+                        resetForm();
+                    } else {
+                        showStatus('Error: ' + (result.error?.message || 'Gagal menyimpan presensi'), 'error');
+                    }
+                }
+            } catch (err) {
+                showStatus('Error: ' + err.message, 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Simpan Presensi';
+            }
+        });
+
+        function hasSignature() {
+            const canvas = document.getElementById('tanda_tangan');
+            const ctx = canvas.getContext('2d');
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            return imageData.data.some(pixel => pixel !== 0);
+        }
+
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('statusMessage');
+            statusDiv.textContent = message;
+            statusDiv.classList.remove('hidden', 'bg-green-100', 'text-green-900', 'bg-red-100', 'text-red-900');
+            if (type === 'success') {
+                statusDiv.classList.add('bg-green-100', 'text-green-900');
+            } else {
+                statusDiv.classList.add('bg-red-100', 'text-red-900');
+            }
+        }
+
+        function renderPresensiList(data) {
+            const list = document.getElementById('presensiList');
+            if (data.length === 0) {
+                list.innerHTML = '<div class="p-8 text-center text-gray-500"><p class="text-lg">Belum ada data presensi.</p></div>';
+                return;
+            }
+
+            let html = '<table class="w-full"><thead class="bg-blue-600 text-white"><tr><th class="p-4 text-left">No</th><th class="p-4 text-left">Nama</th><th class="p-4 text-left">Kelas</th><th class="p-4 text-left">Waktu</th></tr></thead><tbody>';
+
+            data.forEach((item, index) => {
+                const waktu = new Date(item.waktu_presensi).toLocaleString('id-ID');
+                html += `<tr class="border-b hover:bg-gray-50"><td class="p-4">${index + 1}</td><td class="p-4">${item.nama}</td><td class="p-4">${item.kelas}</td><td class="p-4">${waktu}</td></tr>`;
+            });
+
+            html += '</tbody></table>';
+            list.innerHTML = html;
+        }
+
+        // Set default nav button
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.nav-btn')[0].classList.add('nav-active');
+            initSDKs();
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9dafb542960c8196',t:'MTc3MzI4NjA5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
+
+
+
+
+
+
+
+
